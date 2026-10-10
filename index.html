@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>PBR Token</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { font-family: 'Inter', system-ui, sans-serif; }
+    body { background: #050714; color: #f1f5f9; }
+    .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(139, 92, 246, 0.25); }
+    .glow { box-shadow: 0 0 40px rgba(139, 92, 246, 0.35); }
+    .mining-ring { animation: pulse 3s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.05); opacity: 1; } }
+    .page { display: none; }
+    .page.active { display: block; }
+    .nav-item.active { color: #a78bfa; }
+    .progress-bar { background: linear-gradient(90deg, #8b5cf6, #22d3ee); }
+  </style>
+</head>
+<body class="min-h-screen pb-20">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 px-4 py-3 flex items-center gap-3 bg-[#050714]/90 backdrop-blur border-b border-violet-900/40">
+    <img src="logo.png" alt="PBR Logo" class="w-10 h-10 rounded-full glow" />
+    <div>
+      <h1 class="text-lg font-semibold tracking-tight">PBR Token</h1>
+      <p class="text-xs text-slate-400">AI Intelligence · Mining</p>
+    </div>
+    <div class="ml-auto text-right">
+      <p class="text-xs text-slate-400">Balance</p>
+      <p class="text-sm font-semibold text-violet-300" id="header-balance">0.0000 PBR</p>
+    </div>
+  </header>
+
+  <!-- Pages -->
+  <main class="px-4 py-4 space-y-4">
+
+    <!-- MINE -->
+    <section id="mine" class="page active space-y-5">
+      <div class="text-center">
+        <div class="relative inline-block">
+          <div class="absolute inset-0 rounded-full bg-violet-600/20 mining-ring"></div>
+          <img src="logo.png" alt="PBR" class="relative w-36 h-36 rounded-full glow mx-auto" />
+        </div>
+        <div class="mt-4">
+          <p class="text-3xl font-bold" id="mine-balance">0.0000</p>
+          <p class="text-sm text-slate-400">PBR</p>
+        </div>
+        <div class="mt-2 flex justify-center gap-2 text-xs">
+          <span class="px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-300" id="status">Active</span>
+          <span class="px-2 py-1 rounded-full bg-violet-500/20 text-violet-300">Level <span id="current-level">1</span></span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div class="glass rounded-2xl p-4">
+          <p class="text-xs text-slate-400">Speed</p>
+          <p class="text-lg font-semibold text-cyan-300" id="speed">0.50 /hr</p>
+        </div>
+        <div class="glass rounded-2xl p-4">
+          <p class="text-xs text-slate-400">Daily Est.</p>
+          <p class="text-lg font-semibold" id="daily">12.00 PBR</p>
+        </div>
+        <div class="glass rounded-2xl p-4">
+          <p class="text-xs text-slate-400">Unclaimed</p>
+          <p class="text-lg font-semibold text-violet-300" id="unclaimed">0.0000</p>
+        </div>
+        <div class="glass rounded-2xl p-4">
+          <p class="text-xs text-slate-400">Total Mined</p>
+          <p class="text-lg font-semibold" id="total-mined">0.00</p>
+        </div>
+      </div>
+
+      <button id="claim-btn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-cyan-500 font-semibold text-white shadow-lg active:scale-[0.98] transition">
+        Claim Reward
+      </button>
+      <p class="text-center text-xs text-slate-500" id="claim-info">Last claim: Never · Eligible now</p>
+    </section>
+
+    <!-- TASKS -->
+    <section id="tasks" class="page space-y-4">
+      <h2 class="text-xl font-semibold">Daily Check-in</h2>
+      <div class="flex justify-between glass rounded-2xl p-4">
+        <div class="text-center" id="day1"><div class="w-8 h-8 rounded-full bg-violet-600 mx-auto flex items-center justify-center text-xs">1</div><p class="text-[10px] mt-1">+1</p></div>
+        <div class="text-center"><div class="w-8 h-8 rounded-full bg-slate-700 mx-auto flex items-center justify-center text-xs">2</div><p class="text-[10px] mt-1">+2</p></div>
+        <div class="text-center"><div class="w-8 h-8 rounded-full bg-slate-700 mx-auto flex items-center justify-center text-xs">3</div><p class="text-[10px] mt-1">+3</p></div>
+        <div class="text-center"><div class="w-8 h-8 rounded-full bg-slate-700 mx-auto flex items-center justify-center text-xs">4</div><p class="text-[10px] mt-1">+5</p></div>
+        <div class="text-center"><div class="w-8 h-8 rounded-full bg-slate-700 mx-auto flex items-center justify-center text-xs">5</div><p class="text-[10px] mt-1">+8</p></div>
+        <div class="text-center"><div class="w-8 h-8 rounded-full bg-slate-700 mx-auto flex items-center justify-center text-xs">6</div><p class="text-[10px] mt-1">+13</p></div>
+        <div class="text-center"><div class="w-8 h-8 rounded-full bg-slate-700 mx-auto flex items-center justify-center text-xs">7</div><p class="text-[10px] mt-1">+21</p></div>
+      </div>
+      <button class="w-full py-3 rounded-xl bg-violet-600/80 text-sm font-medium">Check-in Today</button>
+
+      <h2 class="text-xl font-semibold pt-2">Tasks</h2>
+      <div class="space-y-3" id="task-list">
+        <!-- Tasks injected by JS -->
+      </div>
+    </section>
+
+    <!-- MINERS -->
+    <section id="miners" class="page space-y-4">
+      <div class="glass rounded-2xl p-4">
+        <p class="text-sm text-slate-400">Current Level</p>
+        <p class="text-2xl font-bold text-violet-300">Level <span id="miner-level">1</span></p>
+        <div class="mt-2 h-2 bg-slate-800 rounded-full overflow-hidden">
+          <div class="h-full progress-bar" style="width: 35%"></div>
+        </div>
+        <p class="text-xs text-slate-500 mt-1">Progress to next level</p>
+      </div>
+      <div class="space-y-3" id="level-list"></div>
+    </section>
+
+    <!-- FRIENDS -->
+    <section id="friends" class="page space-y-4">
+      <div class="glass rounded-2xl p-4">
+        <p class="text-xs text-slate-400 mb-1">Your Referral Link</p>
+        <div class="flex gap-2">
+          <input id="ref-link" readonly class="flex-1 bg-slate-900/50 rounded-lg px-3 py-2 text-sm" value="https://t.me/YourBot/app?startapp=ref_demo" />
+          <button onclick="copyLink()" class="px-4 py-2 bg-violet-600 rounded-lg text-sm">Copy</button>
+        </div>
+        <button class="mt-2 w-full py-2 text-sm border border-violet-500/40 rounded-lg">Share via Telegram</button>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="glass rounded-2xl p-4 text-center"><p class="text-2xl font-bold">0</p><p class="text-xs text-slate-400">Invited</p></div>
+        <div class="glass rounded-2xl p-4 text-center"><p class="text-2xl font-bold">0</p><p class="text-xs text-slate-400">Qualified</p></div>
+      </div>
+      <p class="text-sm text-slate-400">Referral rewards and commissions are configured and paid only after backend verification.</p>
+    </section>
+
+    <!-- WALLET -->
+    <section id="wallet" class="page space-y-4">
+      <div class="glass rounded-2xl p-5 text-center">
+        <p class="text-sm text-slate-400">Available Balance</p>
+        <p class="text-3xl font-bold text-violet-300" id="wallet-balance">0.0000 PBR</p>
+        <p class="text-xs text-slate-500 mt-1">Unclaimed mining: <span id="wallet-unclaimed">0.0000</span></p>
+      </div>
+      <div class="flex gap-2 text-xs">
+        <button class="filter-tab flex-1 py-2 rounded-lg bg-violet-600/40" data-filter="all">All</button>
+        <button class="filter-tab flex-1 py-2 rounded-lg bg-slate-800" data-filter="mining">Mining</button>
+        <button class="filter-tab flex-1 py-2 rounded-lg bg-slate-800" data-filter="task">Tasks</button>
+        <button class="filter-tab flex-1 py-2 rounded-lg bg-slate-800" data-filter="referral">Referrals</button>
+      </div>
+      <div class="space-y-2" id="tx-list">
+        <div class="glass rounded-xl p-3 text-sm text-slate-400 text-center">No transactions yet</div>
+      </div>
+      <button class="w-full py-3 rounded-xl border border-violet-500/50 text-sm">Request Withdrawal</button>
+    </section>
+  </main>
+
+  <!-- Bottom Nav -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-[#0a0e1f]/95 backdrop-blur border-t border-violet-900/40 flex justify-around py-2 px-1 z-50">
+    <button class="nav-item active flex flex-col items-center text-xs py-1" data-page="mine">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      Mine
+    </button>
+    <button class="nav-item flex flex-col items-center text-xs py-1 text-slate-400" data-page="tasks">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      Tasks
+    </button>
+    <button class="nav-item flex flex-col items-center text-xs py-1 text-slate-400" data-page="miners">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+      Miners
+    </button>
+    <button class="nav-item flex flex-col items-center text-xs py-1 text-slate-400" data-page="friends">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+      Friends
+    </button>
+    <button class="nav-item flex flex-col items-center text-xs py-1 text-slate-400" data-page="wallet">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+      Wallet
+    </button>
+  </nav>
+
+  <script>
+    // Telegram Mini App init
+    if (window.Telegram?.WebApp) {
+      Telegram.WebApp.ready();
+      Telegram.WebApp.expand();
+      Telegram.WebApp.setHeaderColor('#050714');
+      Telegram.WebApp.setBackgroundColor('#050714');
+    }
+
+    // Navigation
+    document.querySelectorAll('.nav-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active', 'text-violet-300'));
+        document.querySelectorAll('.nav-item').forEach(b => b.classList.add('text-slate-400'));
+        btn.classList.add('active');
+        btn.classList.remove('text-slate-400');
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(btn.dataset.page).classList.add('active');
+      });
+    });
+
+    // Mock data
+    let balance = 0;
+    let unclaimed = 0.1245;
+    let totalMined = 42.5;
+
+    function updateUI() {
+      document.getElementById('header-balance').textContent = balance.toFixed(4) + ' PBR';
+      document.getElementById('mine-balance').textContent = balance.toFixed(4);
+      document.getElementById('unclaimed').textContent = unclaimed.toFixed(4);
+      document.getElementById('wallet-balance').textContent = balance.toFixed(4) + ' PBR';
+      document.getElementById('wallet-unclaimed').textContent = unclaimed.toFixed(4);
+      document.getElementById('total-mined').textContent = totalMined.toFixed(2);
+    }
+    updateUI();
+
+    // Live counter demo (replace with server poll)
+    setInterval(() => {
+      if (document.getElementById('status').textContent === 'Active') {
+        unclaimed += 0.0001;
+        document.getElementById('unclaimed').textContent = unclaimed.toFixed(4);
+      }
+    }, 2000);
+
+    document.getElementById('claim-btn').addEventListener('click', () => {
+      if (unclaimed > 0) {
+        balance += unclaimed;
+        totalMined += unclaimed;
+        unclaimed = 0;
+        updateUI();
+        document.getElementById('claim-info').textContent = 'Claimed just now · Next in 24h (demo)';
+        // In production: POST /api/mining/claim
+      }
+    });
+
+    // Tasks
+    const tasks = [
+      { title: 'Join Telegram Channel', reward: '5 PBR', status: 'Available' },
+      { title: 'Join Telegram Group', reward: '5 PBR', status: 'Available' },
+      { title: 'Subscribe YouTube', reward: '10 PBR', status: 'Available' },
+      { title: 'Follow X / Twitter', reward: '5 PBR', status: 'Available' },
+      { title: 'Invite 3 Friends', reward: '25 PBR', status: 'In Progress' }
+    ];
+    document.getElementById('task-list').innerHTML = tasks.map(t => `
+      <div class="glass rounded-2xl p-4 flex items-center justify-between">
+        <div>
+          <p class="font-medium">${t.title}</p>
+          <p class="text-xs text-violet-300">${t.reward}</p>
+        </div>
+        <button class="px-4 py-1.5 text-xs rounded-full bg-violet-600/70">${t.status === 'Available' ? 'Start' : 'Verify'}</button>
+      </div>
+    `).join('');
+
+    // Miners levels
+    const levels = [
+      { level: 1, speed: '0.50/hr', cost: 'Free', unlocked: true },
+      { level: 2, speed: '1.20/hr', cost: '50 PBR', unlocked: false },
+      { level: 3, speed: '2.80/hr', cost: '150 PBR', unlocked: false },
+      { level: 4, speed: '6.00/hr', cost: '400 PBR', unlocked: false }
+    ];
+    document.getElementById('level-list').innerHTML = levels.map(l => `
+      <div class="glass rounded-2xl p-4 ${l.unlocked ? '' : 'opacity-60'}">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="font-semibold">Level ${l.level}</p>
+            <p class="text-xs text-cyan-300">${l.speed}</p>
+          </div>
+          <button class="px-4 py-1.5 text-xs rounded-full ${l.unlocked ? 'bg-emerald-600/40' : 'bg-slate-700'}" ${!l.unlocked ? 'disabled' : ''}>
+            ${l.unlocked ? 'Active' : l.cost}
+          </button>
+        </div>
+      </div>
+    `).join('');
+
+    function copyLink() {
+      const input = document.getElementById('ref-link');
+      input.select();
+      navigator.clipboard.writeText(input.value);
+      alert('Referral link copied');
+    }
+
+    // Filter tabs (demo)
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.replace('bg-violet-600/40', 'bg-slate-800'));
+        tab.classList.replace('bg-slate-800', 'bg-violet-600/40');
+      });
+    });
+  </script>
+</body>
+</html>
